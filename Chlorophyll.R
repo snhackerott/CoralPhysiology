@@ -1,10 +1,14 @@
+#Title: "Calculation of Chlorophyll Concentration (ug/cm^2)"
+#Author: "Serena Hackerott"
+#Date: "08/22/2023"
+
 ##Equations for Dinos from Jeffrey and Humphrey 1975 in 100% acetone
 #chla = 11.43*A663 - 0.64*A630
 #chlc2 = 27.09*A630 - 3.63*A663
 
 ##Load Data
-Chl<-read.csv("Chlorophyll.csv",  header=TRUE)
-SampleData<-read.csv("SampleData.csv",  header=TRUE)
+Chl<-read.csv("Data/Chlorophyll.csv",  header=TRUE)
+SampleData<-read.csv("Data/SampleData.csv",  header=TRUE)
 
 ##Subtract Background A750 from A630 and A663
 Chl$A630.c<-Chl$A630-Chl$A750
@@ -19,6 +23,8 @@ Chl$Chl.a_ug.ml<-11.43*Chl$A663.c- 0.64*Chl$A630.c
 Chl$Chl.c2_ug.ml <- 27.09*Chl$A630.c - 3.63*Chl$A663.c
 
 ##Merge with Sample Data to Calculate Chlorophyll per Surface Area
+#Merges by Random Number (RandN) column
+#Adds necessary Slurry Volume (Vol_ml) and Surface Area (SA_cm2) columns
 Chl<-merge(Chl, SampleData,  all=TRUE)
 
 ##Calculate Total Chlorophyll-a and c2 (ug) 

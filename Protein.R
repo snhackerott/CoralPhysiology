@@ -1,4 +1,4 @@
-#Title: "Calculation of Protein Concentration"
+#Title: "Calculation of Protein Concentration (ug/cm^2)"
 #Author: "Serena Hackerott"
 #Date: "08/29/2023"
 
@@ -14,6 +14,7 @@ Prot.St<- subset(Prot, Input=="Standard")
 
 ##Merge Standard Meta Data with Absorbance data
 #Merges by Random Number (RandN) column
+#Adds necessary Absorbance at 562nm (A562) column
 BCAStands<-merge(BCA.Stand, Prot.St, all.x=TRUE)
 
 ##Plot Protein Concentration as a function of Absorbance 
@@ -62,6 +63,7 @@ Prot.Un$TP_ug.ml<-TP.mod(Prot.Un$A562)
 
 ##Merge with Sample Meta Data to Calculate Protein per Surface Area
 #Merges by Random Number (RandN) column
+#Adds necessary Slurry Volume (Vol_ml) and Surface Area (SA_cm2) columns
 Prot.Un<-merge(Prot.Un, SampData, all.x=TRUE, all.y=FALSE)
 
 ##Calculate Total Protein (ug) 
